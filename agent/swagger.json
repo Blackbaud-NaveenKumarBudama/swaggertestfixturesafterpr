@@ -1,0 +1,54 @@
+{
+  "openapi": "3.0.4",
+  "info": { "title": "Test Agent Tools API", "version": "1.0" },
+  "paths": {
+    "/agent/thingamajig-status": {
+      "get": {
+        "operationId": "GetThingamajigStatus",
+        "security": [{ "agent": [] }],
+        "parameters": [
+          {
+            "name": "thingamajigId",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "x-agent-tool-properties": {
+          "name": "get_thingamajig_status",
+          "title": "Get Thingamajig Status",
+          "description": "Returns the current status of a thingamajig.",
+          "permissionScope": "test-tool-scope"
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "agent": {
+        "type": "oauth2",
+        "flows": {
+          "clientCredentials": {
+            "tokenUrl": "https://example.com/oauth2/token",
+            "scopes": {}
+          }
+        }
+      }
+    }
+  }
+}
